@@ -56,6 +56,18 @@ class Extension implements ExtensionInterface
             $directory = realpath(rtrim($config['cache_directory'], '/'));
             $container->setParameter('behat.jira.cache_directory', $directory);
         }
+        if (isset($config['proxy']['host'])) {
+          $container->setParameter('behat.jira.proxy.host', $config['proxy']['host']);
+        }
+        if (isset($config['proxy']['port'])) {
+          $container->setParameter('behat.jira.proxy.port', $config['proxy']['port']);
+        }
+        if (isset($config['proxy']['username'])) {
+          $container->setParameter('behat.jira.proxy.username', $config['proxy']['username']);
+        }
+        if (isset($config['proxy']['password'])) {
+          $container->setParameter('behat.jira.proxy.password', $config['proxy']['password']);
+        }
     }
 
     /**
@@ -91,6 +103,21 @@ class Extension implements ExtensionInterface
                 end()->
                 scalarNode('cache_directory')->
                     defaultNull()->
+                end()->
+                arrayNode('proxy')->
+                    children()->
+                        scalarNode('host')->
+                            defaultNull()->
+                        end()->
+                        scalarNode('port')->
+                        end()->
+                        scalarNode('username')->
+                            defaultNull()->
+                        end()->
+                        scalarNode('password')->
+                            defaultNull()->
+                        end()->
+                    end()->
                 end()->
             end()->
         end();

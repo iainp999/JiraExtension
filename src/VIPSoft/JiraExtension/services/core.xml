@@ -17,6 +17,10 @@
         <parameter key="behat.jira.comment_on_fail"></parameter>
         <parameter key="behat.jira.reopen_on_fail"></parameter>
         <parameter key="behat.jira.feature_field"></parameter>
+        <parameter key="behat.jira.proxy.host"></parameter>
+        <parameter key="behat.jira.proxy.port"></parameter>
+        <parameter key="behat.jira.proxy.username"></parameter>
+        <parameter key="behat.jira.proxy.password"></parameter>
     </parameters>
 
     <services>
@@ -38,6 +42,12 @@
 
         <service id="behat.jira.soap_client" class="SoapClient" public="false">
             <argument type="string">%behat.jira.host%/rpc/soap/jirasoapservice-v2?wsdl</argument>
+            <argument type="collection">
+                <argument key="proxy_host" type="string">%behat.jira.proxy.host%</argument>
+                <argument key="proxy_port" type="string">%behat.jira.proxy.port%</argument>
+                <argument key="proxy_login" type="string">%behat.jira.proxy.username%</argument>
+                <argument key="proxy_password" type="string">%behat.jira.proxy.password%</argument>
+            </argument>
         </service>
 
         <service id="behat.jira.service.jira" class="%behat.jira.service.jira.class%">
